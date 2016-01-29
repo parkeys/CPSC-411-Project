@@ -224,12 +224,13 @@ Expression PrimaryExpression() : {
 	ExpressionList el;
 }
 { t=<INTEGER_LITERAL>					{ return new IntegerLiteral(t.image); }
-| i=Identifier()						{ return new IdentifierExp(i); }
 | "(" e=Expression() ")"				{ return e; }
-| "return"
+| i=Identifier()
+(  
 	"("
 	el=ExpressionList()
-	")"						{return el;}
+	")"
+)?										{ return new IdentifierExp(i); }
 }
 
 String Identifier() : {
