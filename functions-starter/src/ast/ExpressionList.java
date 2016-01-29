@@ -12,6 +12,6 @@ public class ExpressionList extends AST {
 
 	@Override
 	public <R> R accept(Visitor<R> v) {
-		return null;//v.visit(this);
+		return v.visit(this);
 	}
 }

@@ -9,7 +9,7 @@ public class FormalList extends AST{
 	
 	public final NodeList<Type> types;
 	public final List<String> names;
-	public final int size;
+	private final int size;
 	
 	public FormalList(List<String> names, NodeList<Type> types) {
 		super();
@@ -17,9 +17,13 @@ public class FormalList extends AST{
 		this.names = names;
 		this.size = names.size();
 	}
+	
+	public int size() {
+		return this.size;
+	}
 
 	@Override
 	public <R> R accept(Visitor<R> v) {
-		return null;//v.visit(this);
+		return v.visit(this);
 	}
 }

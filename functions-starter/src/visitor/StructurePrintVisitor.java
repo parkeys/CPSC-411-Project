@@ -187,4 +187,16 @@ public class StructurePrintVisitor implements Visitor<Void> {
 		return null;
 	}
 
+	@Override
+	public Void visit(FormalList f) {
+		out.println("FormalList");
+		out.indent();
+		for (int i = 0; i < f.size(); i++) {
+			f.types.elementAt(i).accept(this);
+			out.print(f.names.get(i));
+		}
+		out.outdent();
+		return null;
+	}
+
 }
