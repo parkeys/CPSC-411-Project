@@ -135,6 +135,10 @@ public class Test3Parse {
 		acceptExpression("1 ? 2 ? 3 ? 4 : 5 : 6 : 7");
 		acceptExpression("1 ? 2 ? 3 : 4 ? 5 : 6 : 7 ? 8 : 9");
 	}
+	
+	@Test public void testFuncCall() throws Exception {
+		acceptExpression("foo(x,y,z)");
+	}
 
 	/////////////////////////////////////////////////////////////////////////////////
 	// Now let's work on making statement parsing complete.
