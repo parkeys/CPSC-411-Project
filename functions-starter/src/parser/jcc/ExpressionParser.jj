@@ -231,6 +231,13 @@ Expression PrimaryExpression() : {
 	el=ExpressionList()
 	")"
 )?										{ return new IdentifierExp(i); }
+// TEMP COMMENTS: this replaces
+// i=Identifier() { return new IdentifierExp(i); }
+// to fix the "can't distinguish expressions which start the same" problem
+// the problem is I don't think returning just the identifier is the correct behaviour.
+// if it is we're great! everything works. But I don't have a better idea of what it
+// should be and this was the easiest to implement so this is what we have.
+
 }
 
 String Identifier() : {
