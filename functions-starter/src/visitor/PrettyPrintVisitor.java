@@ -6,6 +6,7 @@ import ast.AST;
 import ast.Assign;
 import ast.BooleanType;
 import ast.Conditional;
+import ast.FunctionDeclaration;
 import ast.IdentifierExp;
 import ast.IntegerLiteral;
 import ast.IntegerType;
@@ -96,6 +97,19 @@ public class PrettyPrintVisitor implements Visitor<Void> {
 		out.print(n.name + " = ");
 		n.value.accept(this);
 		out.println(";");
+		return null;
+	}
+	
+	@Override
+	public Void visit(FunctionDeclaration n) {
+		n.type.accept(this);
+		new IdentifierExp(n.name).accept(this);
+		out.print("(");
+		n.parameters.accept(this);
+		out.print(") {");
+		n.body.accept(this);
+		n.returnVal.accept(this);
+		out.print(";}");
 		return null;
 	}
 

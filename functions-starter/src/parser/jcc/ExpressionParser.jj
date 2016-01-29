@@ -44,6 +44,9 @@ TOKEN : /* SEPARATORS and OPERATORS*/
 |	<SMALLER:"<">
 |	<NOT:	 "!">
 | 	<SEMICOLON:	 ";" >
+|	< RETURN: "return" >
+|	< INTEGER_TYPE: "int" >
+|	< BOOLEAN_TYPE: "boolean" >
 }
 	
 TOKEN :
@@ -65,12 +68,37 @@ Program Program() : {
 	{ return new Program(ss, new Print(e)); }
 }
 Statement Statement() : {
-	Statement s = null; //TODO: should not be null ever!
+	Statement s;
 }
 {	
-	s=Assign()	
-	{ return s; }		
+	s=Assign()						{ return s; }
+	| s=FunctionDeclaration()		{ return s; }
 }
+
+Statement FunctionDeclaration() : {
+	Type t;
+	String name;
+	FormalList parameters;
+	NodeList<Statement> body = new NodeList<Statement>();
+	Statement a;
+	Expression returnVal;
+}
+{	t=Type()
+	name=Identifier()
+	"(" 
+	parameters=FormalList()
+	")"
+	"{"
+	( a=Assign()
+		{ body.add(a); } 
+	)*
+	"return"
+	returnVal=Expression()
+	";"
+	"}"
+		{ return new FunctionDeclaration(t, name, parameters, body, returnVal); }
+}
+
 Statement Assign() : {
 	String name;
 	Expression value;
@@ -79,6 +107,28 @@ Statement Assign() : {
 	"="
 	value=Expression() ";"
 		{return new Assign(name, value); }
+}
+
+FormalList FormalList() : {
+	List<String> ids = new ArrayList<String>();
+	NodeList<Type> ts = new NodeList<Type>();
+	String id;
+	Type t;
+}
+{
+	( t=Type()
+		{ ts.add(t); } 
+	id=Identifier()
+		{ ids.add(id); }
+		
+		( ","
+		t=Type()
+			{ ts.add(t); } 
+		id=Identifier()
+			{ ids.add(id); }
+		)*
+	)?
+		{return new FormalList(ids, ts); }
 }
 
 
@@ -91,6 +141,21 @@ Expression Expression() : {
 		{	e = new Conditional(e, e2, e3); }
 	)?
 	{ return e; }
+}
+
+ExpressionList ExpressionList() : {
+	NodeList<Expression> es = new NodeList<Expression>();
+	Expression e;
+}
+{
+	(e = Expression()
+		{ es.add(e); }
+	(","
+	e = Expression()
+		{ es.add(e); }
+	)*
+	)?
+	{return new ExpressionList(es); }
 }
 
 // For parsing anything with priority same or higher than <
@@ -131,6 +196,16 @@ Expression MultExpression() :  {
 	{ return e; }
 }
 
+Type Type() : {
+	Token t;
+}
+{
+	t=<INTEGER_TYPE>
+		{return new IntegerType();}
+|	t=<BOOLEAN_TYPE>
+		{return new BooleanType();}
+}	
+
 // For parsing anything with priority same or higher than ! expressions:
 Expression NotExpression() : {
 	Expression e;
@@ -146,10 +221,15 @@ Expression PrimaryExpression() : {
 	Token t;
 	String i, f;
 	Expression e;
+	ExpressionList el;
 }
 { t=<INTEGER_LITERAL>					{ return new IntegerLiteral(t.image); }
 | i=Identifier()						{ return new IdentifierExp(i); }
 | "(" e=Expression() ")"				{ return e; }
+| "return"
+	"("
+	el=ExpressionList()
+	")"						{return el;}
 }
 
 String Identifier() : {

@@ -4,6 +4,8 @@ import ast.AST;
 import ast.Assign;
 import ast.BooleanType;
 import ast.Conditional;
+import ast.FormalList;
+import ast.FunctionDeclaration;
 import ast.IdentifierExp;
 import ast.IntegerLiteral;
 import ast.IntegerType;
@@ -31,6 +33,7 @@ public interface Visitor<R> {
 
 	//Lists
 	public <T extends AST> R visit(NodeList<T> ns);
+//	public R visit(FormalList f);
 	
 	//Declarations
 	public R visit(Program n);
@@ -40,6 +43,7 @@ public interface Visitor<R> {
 	//Statements
 	public R visit(Print n);
 	public R visit(Assign n);
+	public R visit(FunctionDeclaration n);
 	
 	//Expressions
 	public R visit(LessThan n);

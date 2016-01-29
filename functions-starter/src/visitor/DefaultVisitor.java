@@ -4,6 +4,7 @@ import ast.AST;
 import ast.Assign;
 import ast.BooleanType;
 import ast.Conditional;
+import ast.FunctionDeclaration;
 import ast.IdentifierExp;
 import ast.IntegerLiteral;
 import ast.IntegerType;
@@ -74,6 +75,11 @@ public class DefaultVisitor<R> implements Visitor<R> {
 
 	@Override
 	public R visit(Assign n) {
+		throw new Error("Not implemented");
+	}
+	
+	@Override
+	public R visit(FunctionDeclaration n) {
 		throw new Error("Not implemented");
 	}
 

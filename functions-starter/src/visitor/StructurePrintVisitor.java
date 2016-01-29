@@ -6,6 +6,9 @@ import ast.AST;
 import ast.Assign;
 import ast.BooleanType;
 import ast.Conditional;
+import ast.Expression;
+import ast.FormalList;
+import ast.FunctionDeclaration;
 import ast.IdentifierExp;
 import ast.IntegerLiteral;
 import ast.IntegerType;
@@ -17,6 +20,7 @@ import ast.Plus;
 import ast.Print;
 import ast.Program;
 import ast.Times;
+import ast.Type;
 import ast.UnknownType;
 
 import util.IndentingWriter;
@@ -100,6 +104,19 @@ public class StructurePrintVisitor implements Visitor<Void> {
 		out.outdent();
 		return null;
 	}
+	
+	@Override
+	public Void visit(FunctionDeclaration n) {
+		out.println("Function Declaration");
+		out.indent();
+		n.type.accept(this);
+		new IdentifierExp(n.name).accept(this);
+//		n.parameters.accept(this);
+		n.body.accept(this);
+		n.returnVal.accept(this);
+		out.outdent();
+		return null;
+	}
 
 	@Override
 	public Void visit(LessThan n) {
@@ -161,7 +178,7 @@ public class StructurePrintVisitor implements Visitor<Void> {
 		out.outdent();
 		return null;
 	}
-
+	
 	@Override
 	public <T extends AST> Void visit(NodeList<T> nodes) {
 		for (int i = 0; i < nodes.size(); i++) {
