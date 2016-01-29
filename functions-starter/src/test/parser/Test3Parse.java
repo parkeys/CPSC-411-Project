@@ -154,11 +154,6 @@ public class Test3Parse {
 		acceptStatement("int bar(boolean t){numbers = numbers + 1; return 1;}");
 	}
 	
-	@Test public void testExpressionList() throws Exception {
-		acceptStatement("return (x,y,z)");
-	}
-
-	
 	/////////////////////////////////////////////////////////////////////////////////
 	// Finally, check whether the parser accepts all the sample code.
 	@Test 
