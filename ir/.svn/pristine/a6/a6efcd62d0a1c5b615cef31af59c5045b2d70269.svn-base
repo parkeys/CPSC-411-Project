@@ -1,0 +1,193 @@
+MethodFragment {
+   X86_64Frame { label = _Test$do
+      nextLocalOffset = -8
+      formals = List {
+         t2924
+      }
+   }
+   trace scheduled:
+   List {
+      LABEL _L_951
+      MOVE(
+         t2929 <-
+         %rbx:%rbx)
+      MOVE(
+         t2930 <-
+         %r12:%r12)
+      MOVE(
+         t2931 <-
+         %r13:%r13)
+      MOVE(
+         t2932 <-
+         %r14:%r14)
+      MOVE(
+         t2933 <-
+         %r15:%r15)
+      MOVE(
+         t2924 <-
+         %rdi:%rdi)
+      MOVE(
+         t2925 <-
+         CALL(
+            NAME(_Test$id),
+            t2924,
+            CONST 1))
+      MOVE(
+         t2926 <-
+         CALL(
+            NAME(_Test$id),
+            t2924,
+            CONST 2))
+      CJUMP(GE,
+         t2925,
+         t2926,
+         _L_947, _L_946)
+      LABEL _L_946
+      MOVE(
+         t2927 <-
+         BINOP(MUL,
+            t2925, 
+            t2926))
+      LABEL _L_948
+      MOVE(
+         %rax:%rax <-
+         BINOP(MUL,
+            t2925, 
+            t2926))
+      LABEL _bail_945
+      MOVE(
+         %rbx:%rbx <-
+         t2929)
+      MOVE(
+         %r12:%r12 <-
+         t2930)
+      MOVE(
+         %r13:%r13 <-
+         t2931)
+      MOVE(
+         %r14:%r14 <-
+         t2932)
+      MOVE(
+         %r15:%r15 <-
+         t2933)
+      JUMP(NAME(_DONE_952))
+      LABEL _L_947
+      MOVE(
+         t2928 <-
+         BINOP(MUL,
+            t2925, 
+            t2926))
+      JUMP(NAME(_L_948))
+      LABEL _DONE_952
+   }
+}
+MethodFragment {
+   X86_64Frame { label = _Test$id
+      nextLocalOffset = -8
+      formals = List {
+         t2934
+         t2935
+      }
+   }
+   trace scheduled:
+   List {
+      LABEL _L_953
+      MOVE(
+         t2936 <-
+         %rbx:%rbx)
+      MOVE(
+         t2937 <-
+         %r12:%r12)
+      MOVE(
+         t2938 <-
+         %r13:%r13)
+      MOVE(
+         t2939 <-
+         %r14:%r14)
+      MOVE(
+         t2940 <-
+         %r15:%r15)
+      MOVE(
+         t2934 <-
+         %rdi:%rdi)
+      MOVE(
+         t2935 <-
+         %rsi:%rsi)
+      MOVE(
+         %rax:%rax <-
+         t2935)
+      LABEL _bail_949
+      MOVE(
+         %rbx:%rbx <-
+         t2936)
+      MOVE(
+         %r12:%r12 <-
+         t2937)
+      MOVE(
+         %r13:%r13 <-
+         t2938)
+      MOVE(
+         %r14:%r14 <-
+         t2939)
+      MOVE(
+         %r15:%r15 <-
+         t2940)
+      LABEL _DONE_954
+   }
+}
+MethodFragment {
+   X86_64Frame { label = _cs411main
+      nextLocalOffset = -8
+      formals = List {
+      }
+   }
+   trace scheduled:
+   List {
+      LABEL _L_955
+      MOVE(
+         t2941 <-
+         %rbx:%rbx)
+      MOVE(
+         t2942 <-
+         %r12:%r12)
+      MOVE(
+         t2943 <-
+         %r13:%r13)
+      MOVE(
+         t2944 <-
+         %r14:%r14)
+      MOVE(
+         t2945 <-
+         %r15:%r15)
+      MOVE(
+         t2947 <-
+         CALL(
+            NAME(_cs411newobject),
+            CONST 0))
+      MOVE(
+         t2946 <-
+         CALL(
+            NAME(_Test$do),
+            t2947))
+      EXP(CALL(
+         NAME(_cs411println),
+         t2946))
+      LABEL _bail_950
+      MOVE(
+         %rbx:%rbx <-
+         t2941)
+      MOVE(
+         %r12:%r12 <-
+         t2942)
+      MOVE(
+         %r13:%r13 <-
+         t2943)
+      MOVE(
+         %r14:%r14 <-
+         t2944)
+      MOVE(
+         %r15:%r15 <-
+         t2945)
+      LABEL _DONE_956
+   }
+}

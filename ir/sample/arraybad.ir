@@ -1,0 +1,153 @@
+MethodFragment {
+   X86_64Frame { label = _Foo$doit
+      nextLocalOffset = -8
+      formals = List {
+         t2813
+      }
+   }
+   trace scheduled:
+   List {
+      LABEL _L_919
+      MOVE(
+         t2815 <-
+         %rbx:%rbx)
+      MOVE(
+         t2816 <-
+         %r12:%r12)
+      MOVE(
+         t2817 <-
+         %r13:%r13)
+      MOVE(
+         t2818 <-
+         %r14:%r14)
+      MOVE(
+         t2819 <-
+         %r15:%r15)
+      MOVE(
+         t2813 <-
+         %rdi:%rdi)
+      MOVE(
+         t2814 <-
+         CALL(
+            NAME(_cs411newarray),
+            CONST 2))
+      CJUMP(UGE,
+         CONST 0,
+         MEM(BINOP(PLUS,
+            t2814, 
+            CONST -8)),
+         _boundsbad_915, _boundsok_914)
+      LABEL _boundsok_914
+      MOVE(
+         MEM(t2814) <-
+         CONST 0)
+      CJUMP(UGE,
+         CONST 1,
+         MEM(BINOP(PLUS,
+            t2814, 
+            CONST -8)),
+         _boundsbad_915, _boundsok_916)
+      LABEL _boundsok_916
+      MOVE(
+         MEM(BINOP(PLUS,
+            t2814, 
+            CONST 8)) <-
+         CONST 1)
+      CJUMP(UGE,
+         CONST 2,
+         MEM(BINOP(PLUS,
+            t2814, 
+            CONST -8)),
+         _boundsbad_915, _boundsok_917)
+      LABEL _boundsok_917
+      MOVE(
+         MEM(BINOP(PLUS,
+            t2814, 
+            CONST 16)) <-
+         CONST 2)
+      MOVE(
+         %rax:%rax <-
+         CONST 0)
+      LABEL _bail_913
+      MOVE(
+         %rbx:%rbx <-
+         t2815)
+      MOVE(
+         %r12:%r12 <-
+         t2816)
+      MOVE(
+         %r13:%r13 <-
+         t2817)
+      MOVE(
+         %r14:%r14 <-
+         t2818)
+      MOVE(
+         %r15:%r15 <-
+         t2819)
+      JUMP(NAME(_DONE_920))
+      LABEL _boundsbad_915
+      MOVE(
+         %rax:%rax <-
+         CALL(
+            NAME(_cs411error),
+            CONST 1))
+      JUMP(NAME(_bail_913))
+      LABEL _DONE_920
+   }
+}
+MethodFragment {
+   X86_64Frame { label = _cs411main
+      nextLocalOffset = -8
+      formals = List {
+      }
+   }
+   trace scheduled:
+   List {
+      LABEL _L_921
+      MOVE(
+         t2820 <-
+         %rbx:%rbx)
+      MOVE(
+         t2821 <-
+         %r12:%r12)
+      MOVE(
+         t2822 <-
+         %r13:%r13)
+      MOVE(
+         t2823 <-
+         %r14:%r14)
+      MOVE(
+         t2824 <-
+         %r15:%r15)
+      MOVE(
+         t2826 <-
+         CALL(
+            NAME(_cs411newobject),
+            CONST 0))
+      MOVE(
+         t2825 <-
+         CALL(
+            NAME(_Foo$doit),
+            t2826))
+      EXP(CALL(
+         NAME(_cs411println),
+         t2825))
+      LABEL _bail_918
+      MOVE(
+         %rbx:%rbx <-
+         t2820)
+      MOVE(
+         %r12:%r12 <-
+         t2821)
+      MOVE(
+         %r13:%r13 <-
+         t2822)
+      MOVE(
+         %r14:%r14 <-
+         t2823)
+      MOVE(
+         %r15:%r15 <-
+         t2824)
+      LABEL _DONE_922
+   }
+}
