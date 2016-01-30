@@ -204,6 +204,7 @@ public class StructurePrintVisitor implements Visitor<Void> {
 	public Void visit(FunctionCall n) {
 		out.println("FunctionCall " + n.name);
 		out.indent();
+		n.name.accept(this);
 		n.exps.accept(this);
 		return null;
 	}

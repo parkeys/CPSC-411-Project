@@ -135,10 +135,6 @@ public class Test3Parse {
 		acceptExpression("1 ? 2 ? 3 ? 4 : 5 : 6 : 7");
 		acceptExpression("1 ? 2 ? 3 : 4 ? 5 : 6 : 7 ? 8 : 9");
 	}
-	
-	@Test public void testFuncCall() throws Exception {
-		acceptExpression("foo(x,y,z)");
-	}
 
 	/////////////////////////////////////////////////////////////////////////////////
 	// Now let's work on making statement parsing complete.
@@ -151,11 +147,23 @@ public class Test3Parse {
 		acceptStatement("numbers = numbers + 1;");
 		acceptStatement("foo = foo+1;");
 	}
+	
+	@Test public void testParseFuncCall() throws Exception {
+		acceptExpression("foo()");
+		acceptExpression("foo(x)");
+		acceptExpression("foo(x,y)");
+		acceptExpression("foo(x,y,z)");
+	}
+	
 		
-	@Test public void testFuncDef() throws Exception {
+	@Test public void testParseFuncDef() throws Exception {
+		acceptStatement("int foo(){return 1;}");
 		acceptStatement("int foo(){return 1;}");
 		acceptStatement("int bar(){numbers = numbers + 1; return 1;}");
 		acceptStatement("int bar(boolean t){numbers = numbers + 1; return 1;}");
+		acceptStatement("int bar(boolean t, int a){numbers = numbers + 1; return 1;}");
+		acceptStatement("int bar(boolean t, boolean a){numbers = numbers + 1; return 1;}");
+		acceptStatement("int bar(int a, int b, boolean b){numbers = numbers + 1; return 1;}");
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////

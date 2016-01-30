@@ -195,6 +195,7 @@ public class PrettyPrintVisitor implements Visitor<Void> {
 	@Override
 	public Void visit(FunctionCall n) {
 		out.print(n.name + "(");
+		n.name.accept(this);
 		n.exps.accept(this);
 		out.println(")");
 		return null;

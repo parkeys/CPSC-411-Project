@@ -60,20 +60,24 @@ Program Program() : {
 	NodeList<Statement> ss = new NodeList<Statement>();
 	Statement s; 
 	Expression e;
-}{	( s=Statement()
+}
+{
+	( s=Statement()
 		{ ss.add(s); } 
 	)*
 	< PRINT > e = Expression()
 	<EOF>
 	{ return new Program(ss, new Print(e)); }
-}
+}
+
 Statement Statement() : {
 	Statement s;
 }
 {	
 	s=Assign()						{ return s; }
 	| s=FunctionDeclaration()		{ return s; }
-}
+}
+
 
 Statement FunctionDeclaration() : {
 	Type t;
@@ -207,7 +211,6 @@ Expression PrimaryExpression() : {
 	String i, f;
 	Expression e;
 	NodeList<Expression> es = new NodeList<Expression>();
-	Boolean isFunctionCall = false;
 }
 {
   t=<INTEGER_LITERAL>					{ return new IntegerLiteral(t.image); }
@@ -223,9 +226,11 @@ Expression PrimaryExpression() : {
 		)*
 		)?
 		")"
-		{ return new FunctionCall(i,es); }	)?
+		{ return new FunctionCall(new IdentifierExp(i),es); }
+	)?
 	{ return new IdentifierExp(i); }
 }
+
 
 String Identifier() : {
 	Token i;
