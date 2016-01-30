@@ -7,7 +7,6 @@ import ast.Assign;
 import ast.BooleanType;
 import ast.Conditional;
 import ast.Expression;
-import ast.ExpressionList;
 import ast.FormalList;
 import ast.FunctionDeclaration;
 import ast.IdentifierExp;
@@ -199,16 +198,4 @@ public class StructurePrintVisitor implements Visitor<Void> {
 		out.outdent();
 		return null;
 	}
-
-	@Override
-	public Void visit(ExpressionList e) {
-		out.println("ExpressionList");
-		out.indent();
-		for (int i = 0; i < e.size(); i++) {
-			e.elementAt(i).accept(this);
-		}
-		out.outdent();
-		return null;
-	}
-
 }
