@@ -5,6 +5,7 @@ import ast.Assign;
 import ast.BooleanType;
 import ast.Conditional;
 import ast.FormalList;
+import ast.FunctionCall;
 import ast.FunctionDeclaration;
 import ast.IdentifierExp;
 import ast.IntegerLiteral;
@@ -131,6 +132,11 @@ public class DefaultVisitor<R> implements Visitor<R> {
 
 	@Override
 	public R visit(FormalList f) {
+		throw new Error("Not implemented");
+	}
+
+	@Override
+	public R visit(FunctionCall n) {
 		throw new Error("Not implemented");
 	}
 

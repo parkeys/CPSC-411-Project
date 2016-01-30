@@ -5,6 +5,7 @@ import ast.Assign;
 import ast.BooleanType;
 import ast.Conditional;
 import ast.FormalList;
+import ast.FunctionCall;
 import ast.FunctionDeclaration;
 import ast.IdentifierExp;
 import ast.IntegerLiteral;
@@ -37,7 +38,8 @@ public interface Visitor<R> {
 	
 	//Declarations
 	public R visit(Program n);
-	
+	public R visit(FunctionDeclaration n);
+
 	//Types
 	public R visit(IntegerType n);
 	public R visit(BooleanType n);
@@ -46,7 +48,6 @@ public interface Visitor<R> {
 	//Statements
 	public R visit(Print n);
 	public R visit(Assign n);
-	public R visit(FunctionDeclaration n);
 	
 	//Expressions
 	public R visit(LessThan n);
@@ -57,5 +58,6 @@ public interface Visitor<R> {
 	public R visit(IntegerLiteral n);
 	public R visit(IdentifierExp n);
 	public R visit(Not not);
+	public R visit(FunctionCall n);
 
 }

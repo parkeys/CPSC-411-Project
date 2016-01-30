@@ -143,21 +143,6 @@ Expression Expression() : {
 	{ return e; }
 }
 
-ExpressionList ExpressionList() : {
-	NodeList<Expression> es = new NodeList<Expression>();
-	Expression e;
-}
-{
-	(e = Expression()
-		{ es.add(e); }
-	(","
-	e = Expression()
-		{ es.add(e); }
-	)*
-	)?
-	{return new ExpressionList(es); }
-}
-
 // For parsing anything with priority same or higher than <
 Expression CompExpression() : {
 	Expression e, e2;
@@ -221,23 +206,25 @@ Expression PrimaryExpression() : {
 	Token t;
 	String i, f;
 	Expression e;
-	ExpressionList el;
+	NodeList<Expression> es = new NodeList<Expression>();
+	Boolean isFunctionCall = false;
 }
-{ t=<INTEGER_LITERAL>					{ return new IntegerLiteral(t.image); }
+{
+  t=<INTEGER_LITERAL>					{ return new IntegerLiteral(t.image); }
 | "(" e=Expression() ")"				{ return e; }
 | i=Identifier()
-(  
-	"("
-	el=ExpressionList()
-	")"
-)?										{ return new IdentifierExp(i); }
-// TEMP COMMENTS: this replaces
-// i=Identifier() { return new IdentifierExp(i); }
-// to fix the "can't distinguish expressions which start the same" problem
-// the problem is I don't think returning just the identifier is the correct behaviour.
-// if it is we're great! everything works. But I don't have a better idea of what it
-// should be and this was the easiest to implement so this is what we have.
-
+	(
+		"("
+		(e = Expression()
+			{ es.add(e); }
+		(","
+		e = Expression()
+			{ es.add(e); }
+		)*
+		)?
+		")"
+		{ return new FunctionCall(i,es); }	)?
+	{ return new IdentifierExp(i); }
 }
 
 String Identifier() : {

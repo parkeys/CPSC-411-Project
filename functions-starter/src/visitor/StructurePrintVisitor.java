@@ -8,6 +8,7 @@ import ast.BooleanType;
 import ast.Conditional;
 import ast.Expression;
 import ast.FormalList;
+import ast.FunctionCall;
 import ast.FunctionDeclaration;
 import ast.IdentifierExp;
 import ast.IntegerLiteral;
@@ -196,6 +197,14 @@ public class StructurePrintVisitor implements Visitor<Void> {
 			out.print(f.names.get(i));
 		}
 		out.outdent();
+		return null;
+	}
+
+	@Override
+	public Void visit(FunctionCall n) {
+		out.println("FunctionCall " + n.name);
+		out.indent();
+		n.exps.accept(this);
 		return null;
 	}
 }
