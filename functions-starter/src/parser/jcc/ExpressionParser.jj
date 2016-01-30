@@ -226,7 +226,7 @@ Expression PrimaryExpression() : {
 		)*
 		)?
 		")"
-		{ return new FunctionCall(new IdentifierExp(i),es); }
+		{ return new FunctionCall(i ,es); }
 	)?
 	{ return new IdentifierExp(i); }
 }
