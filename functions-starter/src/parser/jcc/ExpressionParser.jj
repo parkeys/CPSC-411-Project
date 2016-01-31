@@ -100,7 +100,7 @@ Statement FunctionDeclaration() : {
 	returnVal=Expression()
 	";"
 	"}"
-		{ return new FunctionDeclaration(t, name, parameters, body, returnVal); }
+		{ return new FunctionDeclaration(t, new IdentifierExp(name), parameters, body, returnVal); }
 }
 
 Statement Assign() : {
@@ -114,7 +114,7 @@ Statement Assign() : {
 }
 
 FormalList FormalList() : {
-	List<String> ids = new ArrayList<String>();
+	NodeList<IdentifierExp> ids = new NodeList<IdentifierExp>();
 	NodeList<Type> ts = new NodeList<Type>();
 	String id;
 	Type t;
@@ -123,13 +123,13 @@ FormalList FormalList() : {
 	( t=Type()
 		{ ts.add(t); } 
 	id=Identifier()
-		{ ids.add(id); }
+		{ ids.add(new IdentifierExp(id)); }
 		
 		( ","
 		t=Type()
 			{ ts.add(t); } 
 		id=Identifier()
-			{ ids.add(id); }
+			{ ids.add(new IdentifierExp(id)); }
 		)*
 	)?
 		{return new FormalList(ids, ts); }
@@ -226,7 +226,7 @@ Expression PrimaryExpression() : {
 		)*
 		)?
 		")"
-		{ return new FunctionCall(i , new ExpressionList(es)); }
+		{ return new FunctionCall(new IdentifierExp(i) , new ExpressionList(es)); }
 	)?
 	{ return new IdentifierExp(i); }
 }

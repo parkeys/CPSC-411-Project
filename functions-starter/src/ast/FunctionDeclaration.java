@@ -5,12 +5,12 @@ import visitor.Visitor;
 public class FunctionDeclaration extends Statement {
 	
 	public final Type type;
-	public final String name;
+	public final IdentifierExp name;
 	public final FormalList parameters;
 	public final NodeList<Statement> body;
 	public final Expression returnVal;
 	
-	public FunctionDeclaration(Type type, String name, FormalList parameters, NodeList<Statement> body, Expression returnVal) {
+	public FunctionDeclaration(Type type, IdentifierExp name, FormalList parameters, NodeList<Statement> body, Expression returnVal) {
 		super();
 		this.type = type;
 		this.name = name;

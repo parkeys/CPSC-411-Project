@@ -7,10 +7,11 @@ import visitor.Visitor;
 public class FormalList extends AST{
 	
 	public final NodeList<Type> types;
-	public final List<String> names;
+	public final NodeList<IdentifierExp> names;
+//	public final List<String> names;
 	private final int size;
 	
-	public FormalList(List<String> names, NodeList<Type> types) {
+	public FormalList(NodeList<IdentifierExp> names, NodeList<Type> types) {
 		super();
 		this.types = types;
 		this.names = names;

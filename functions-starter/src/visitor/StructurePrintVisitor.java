@@ -91,7 +91,7 @@ public class StructurePrintVisitor implements Visitor<Void> {
 		out.println("Function Declaration");
 		out.indent();
 		n.type.accept(this);
-		new IdentifierExp(n.name).accept(this);
+		n.name.accept(this);
 		n.parameters.accept(this);
 		n.body.accept(this);
 		n.returnVal.accept(this);
@@ -174,7 +174,7 @@ public class StructurePrintVisitor implements Visitor<Void> {
 		out.indent();
 		for (int i = 0; i < f.size(); i++) {
 			f.types.elementAt(i).accept(this);
-			out.print(f.names.get(i));
+			f.names.elementAt(i).accept(this);
 		}
 		out.outdent();
 		return null;

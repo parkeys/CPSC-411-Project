@@ -88,7 +88,7 @@ public class PrettyPrintVisitor implements Visitor<Void> {
 	public Void visit(FunctionDeclaration n) {
 		n.type.accept(this);
 		out.print(" ");
-		new IdentifierExp(n.name).accept(this);
+		n.name.accept(this);
 		out.print("(");
 		n.parameters.accept(this);
 		out.println("){");
@@ -173,7 +173,8 @@ public class PrettyPrintVisitor implements Visitor<Void> {
 		for (int i = 0; i < f.size(); i++) {
 			if (i > 0) out.print(", ");
 			f.types.elementAt(i).accept(this);
-			out.print(" " + f.names.get(i));
+			out.print(" ");
+			f.names.elementAt(i).accept(this);
 		}
 		return null;
 	}

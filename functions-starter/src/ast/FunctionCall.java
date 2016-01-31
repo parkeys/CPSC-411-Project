@@ -4,10 +4,10 @@ import visitor.Visitor;
 
 public class FunctionCall extends Expression {
 
-	public final String name;
+	public final IdentifierExp name;
 	public final ExpressionList exps;
 	
-	public FunctionCall(String name, ExpressionList exps) {
+	public FunctionCall(IdentifierExp name, ExpressionList exps) {
 		super();
 		this.name = name;
 		this.exps = exps;
