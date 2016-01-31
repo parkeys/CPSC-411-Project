@@ -4,6 +4,7 @@ import ast.AST;
 import ast.Assign;
 import ast.BooleanType;
 import ast.Conditional;
+import ast.ExpressionList;
 import ast.FormalList;
 import ast.FunctionCall;
 import ast.FunctionDeclaration;
@@ -139,5 +140,12 @@ public class DefaultVisitor<R> implements Visitor<R> {
 	public R visit(FunctionCall n) {
 		throw new Error("Not implemented");
 	}
+
+	@Override
+	public R visit(ExpressionList e) {
+		throw new Error("Not implemented");
+	}
+	
+	
 
 }

@@ -2,25 +2,7 @@ package visitor;
 
 import java.io.PrintWriter;
 
-import ast.AST;
-import ast.Assign;
-import ast.BooleanType;
-import ast.Conditional;
-import ast.FormalList;
-import ast.FunctionCall;
-import ast.FunctionDeclaration;
-import ast.IdentifierExp;
-import ast.IntegerLiteral;
-import ast.IntegerType;
-import ast.LessThan;
-import ast.Minus;
-import ast.NodeList;
-import ast.Not;
-import ast.Plus;
-import ast.Print;
-import ast.Program;
-import ast.Times;
-import ast.UnknownType;
+import ast.*;
 
 import util.IndentingWriter;
 
@@ -105,13 +87,17 @@ public class PrettyPrintVisitor implements Visitor<Void> {
 	@Override
 	public Void visit(FunctionDeclaration n) {
 		n.type.accept(this);
+		out.print(" ");
 		new IdentifierExp(n.name).accept(this);
 		out.print("(");
 		n.parameters.accept(this);
-		out.print(") {");
+		out.println("){");
+		out.indent();
 		n.body.accept(this);
+		out.print("return ");
 		n.returnVal.accept(this);
-		out.print(";}");
+		out.outdent();
+		out.println(";\n}");
 		return null;
 	}
 
@@ -188,6 +174,15 @@ public class PrettyPrintVisitor implements Visitor<Void> {
 			if (i > 0) out.print(", ");
 			f.types.elementAt(i).accept(this);
 			out.print(" " + f.names.get(i));
+		}
+		return null;
+	}
+
+	@Override
+	public Void visit(ExpressionList e) {
+		for (int i = 0; i < e.exps.size(); i++) {
+			if (i > 0) out.print(", ");
+			e.exps.elementAt(i).accept(this);
 		}
 		return null;
 	}

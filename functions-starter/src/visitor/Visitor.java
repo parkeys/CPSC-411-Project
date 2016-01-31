@@ -1,24 +1,6 @@
 package visitor;
 
-import ast.AST;
-import ast.Assign;
-import ast.BooleanType;
-import ast.Conditional;
-import ast.FormalList;
-import ast.FunctionCall;
-import ast.FunctionDeclaration;
-import ast.IdentifierExp;
-import ast.IntegerLiteral;
-import ast.IntegerType;
-import ast.LessThan;
-import ast.Minus;
-import ast.NodeList;
-import ast.Not;
-import ast.Plus;
-import ast.Print;
-import ast.Program;
-import ast.Times;
-import ast.UnknownType;
+import ast.*;
 
 /**
  * A modernized version of the Visitor interface, adapted from the textbook's
@@ -35,6 +17,7 @@ public interface Visitor<R> {
 	//Lists
 	public <T extends AST> R visit(NodeList<T> ns);
 	public R visit(FormalList f);
+	public R visit(ExpressionList e);
 	
 	//Declarations
 	public R visit(Program n);

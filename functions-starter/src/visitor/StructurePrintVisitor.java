@@ -2,27 +2,7 @@ package visitor;
 
 import java.io.PrintWriter;
 
-import ast.AST;
-import ast.Assign;
-import ast.BooleanType;
-import ast.Conditional;
-import ast.Expression;
-import ast.FormalList;
-import ast.FunctionCall;
-import ast.FunctionDeclaration;
-import ast.IdentifierExp;
-import ast.IntegerLiteral;
-import ast.IntegerType;
-import ast.LessThan;
-import ast.Minus;
-import ast.NodeList;
-import ast.Not;
-import ast.Plus;
-import ast.Print;
-import ast.Program;
-import ast.Times;
-import ast.Type;
-import ast.UnknownType;
+import ast.*;
 
 import util.IndentingWriter;
 
@@ -112,7 +92,7 @@ public class StructurePrintVisitor implements Visitor<Void> {
 		out.indent();
 		n.type.accept(this);
 		new IdentifierExp(n.name).accept(this);
-//		n.parameters.accept(this);
+		n.parameters.accept(this);
 		n.body.accept(this);
 		n.returnVal.accept(this);
 		out.outdent();
@@ -195,6 +175,17 @@ public class StructurePrintVisitor implements Visitor<Void> {
 		for (int i = 0; i < f.size(); i++) {
 			f.types.elementAt(i).accept(this);
 			out.print(f.names.get(i));
+		}
+		out.outdent();
+		return null;
+	}
+
+	@Override
+	public Void visit(ExpressionList e) {
+		out.println("ExpressionList");
+		out.indent();
+		for (int i = 0; i < e.exps.size(); i++) {
+			e.exps.elementAt(i).accept(this);
 		}
 		out.outdent();
 		return null;

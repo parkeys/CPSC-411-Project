@@ -158,7 +158,7 @@ public class Test3Parse {
 		
 	@Test public void testParseFuncDef() throws Exception {
 		acceptStatement("int foo(){return 1;}");
-		acceptStatement("int foo(){return 1;}");
+		acceptStatement("int foo(){a = 1; numbers = numbers + 1; b = a + 3; j = 3 * 4; return 1;}");
 		acceptStatement("int bar(){numbers = numbers + 1; return 1;}");
 		acceptStatement("int bar(boolean t){numbers = numbers + 1; return 1;}");
 		acceptStatement("int bar(boolean t, int a){numbers = numbers + 1; return 1;}");
